@@ -1,13 +1,34 @@
 import ListGroup from 'react-bootstrap/ListGroup';
 import './MovieListItem.css';
 
+//Importera bilder
+import starIcon from '../../assets/star.png'
+import deleteIcon from '../../assets/delete.png'
+
 //const för att den inte är hämtad från bootstrap. 
 const MovieListItem = (props) => {
+
+    //funktion som genererar antalet stjärnor baserat på grade numret
+    const generateStars = () => {
+        //skapa en tom lista
+        let numberOfStars = [];
+
+        //loopa igenom grade och lägg till <img> element baserat på grade.
+        for (let i=0; i < Number(props.movie.grade); i++) {
+            //react gnäller och vill ha key i arrayer även om det inte har ett egentligt syfte här :(
+            numberOfStars.push(<img key={i} src={starIcon} alt="star"/>);
+        }
+        //returnerar stjärnorna till diven med bilder
+        return numberOfStars
+    }
+
     return (
         <ListGroup.Item>
-            <h3>{props.moive.title}</h3>
+            <h3>{props.movie.title}</h3>
             <div>
-                <img src="#" alt={props.moive.title}/>
+                {/*hämta antalet stjärnor*/}
+                {generateStars()}
+                <img src={deleteIcon} alt="delete"/>
             </div>
         </ListGroup.Item>
     );

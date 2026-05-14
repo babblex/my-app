@@ -7,7 +7,7 @@ function MovieList(props) {
   return (
     <ListGroup>
         {/*Loopa igenom listan med filmer och för varje film skickar vi den in i MovieItem*/}
-        {props.moviesList.map(movie => <MovieListItem movie={movie} />)}
+        {props.moviesList.map(movie => <MovieListItem key={movie.id} movie={movie} />)}
     </ListGroup>
   );
 }
