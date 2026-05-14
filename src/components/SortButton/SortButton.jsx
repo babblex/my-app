@@ -1,12 +1,11 @@
 import Button from 'react-bootstrap/Button';
 
-function SortButton({text}) {
-    const handleSortClick = () => {
-        {/*Kod för att hantera sortering */}
-    }    
+function SortButton({text, sortOnClick }) {
+  //Vi tar emot sortOnClick funktionen som kopplar ihop aktuell sorteringsfunktion i App.jsx beroendes på vilken knapp som klickades på.
   return (
     <>
-      <Button variant="primary" onClick={handleSortClick}>{text}</Button>
+    {/* className="me-3" ger marginal mellan knapparna: https://getbootstrap.com/docs/5.1/utilities/spacing/*/}
+      <Button variant="primary" onClick={sortOnClick} className="me-3">{text}</Button>
     </>
   );
 }

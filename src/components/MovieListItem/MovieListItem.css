@@ -1,0 +1,15 @@
+.list-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: rgb(239, 235, 235);
+    margin-bottom: 2%;
+}
+
+img {
+        height: 3.8vh;
+}
+
+h3 {
+    font-size: large;
+}

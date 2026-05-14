@@ -8,10 +8,10 @@ function AddMovieForm(props) { //samma som att skriva const MovieCard = () => {}
     const [movieTitle, setMovieTitle] = useState("");
     const [movieGrade, setMovieGrade] = useState("0");
 
-    //Funktion som genererar ett id för varje film så det ska bli enklare att skriva ut sen, iom listan inte är static skulle man undvika key=index enligt w3school.
-    //Tog inspo här: https://stackoverflow.com/questions/3231459/how-can-i-create-unique-ids-with-javascript
+    //Funktion som genererar ett id för varje film så det ska bli enklare att skriva ut sen, iom listan inte är static skulle man undvika key=index enligt react dokumentation.
+    //Tog inspo här:https://developer.mozilla.org/en-US/docs/Web/API/Crypto/randomUUID
     const generateAnId = () => {
-        return Date.now().toString(36); // (36) gör om datumet till ett id med bokstäver och siffror.
+        return crypto.randomUUID()
     }
 
     //funktion som validerar användarinput och skapar ett nytt filmobjekt 
