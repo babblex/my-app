@@ -1,15 +1,13 @@
 import './MovieList.css';
 import ListGroup from 'react-bootstrap/ListGroup';
-import MovieItem from '../MovieItem/MovieItem';
+import MovieListItem from '../MovieListItem/MovieListItem';
 
-function MovieList() {
+//Tar emot props från App.jsx
+function MovieList(props) {
   return (
     <ListGroup>
-        {/*  Exempel på hur list item kmr se ut med innehåll.
-        <ListGroup.Item>{movies.map(movie => <MovieCard movie={movie} />)}</ListGroup.Item>
-        ...
-      */}
-      <MovieItem></MovieItem>
+        {/*Loopa igenom listan med filmer och för varje film skickar vi den in i MovieItem*/}
+        {props.moviesList.map(movie => <MovieListItem movie={movie} />)}
     </ListGroup>
   );
 }

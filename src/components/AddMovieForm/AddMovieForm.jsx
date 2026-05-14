@@ -1,26 +1,71 @@
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import { useState } from 'react';
 
-function AddMovieForm() { //samma som att skriva const MovieCard = () => {} (antons ex kod)
-  return (
+//Tar emot props från App.jsx så vi kan skicka tillbaka datan senare
+function AddMovieForm(props) { //samma som att skriva const MovieCard = () => {} (antons ex kod)
+  
+    const [movieTitle, setMovieTitle] = useState("");
+    const [movieGrade, setMovieGrade] = useState("0");
+
+    //Funktion som genererar ett id för varje film så det ska bli enklare att sortera och skriva ut sen
+    //Tog inspo här: https://stackoverflow.com/questions/3231459/how-can-i-create-unique-ids-with-javascript
+    const generateAnId = () => {
+        return Date.now().toString(36); // (36) gör om datumet till ett id med bokstäver och siffror.
+    }
+
+    //funktion som validerar användarinput och skapar ett nytt filmobjekt 
+    const handleSubmit = (e) => {
+
+        //inte skicka vidare datan i formuläret.
+        e.preventDefault();
+
+        //Validering av input, att de inte är tom eller 0
+        if ((movieTitle.trim() !== "") && (movieGrade !== "0")) {
+            const newMovie = {
+                "id": generateAnId(),
+                "title": movieTitle,
+                "grade": movieGrade
+            };
+
+            //Skicka upp datan till App.jsx
+            props.addNewMovie(newMovie);
+
+            //Nollställa formulären igen
+            setMovieTitle("");
+            setMovieGrade("0");
+
+        } else {
+            alert("Du måste ange Titel & Betyg");
+        }
+    }
+  
+    return (
     <>
       <Form.Group className="mb-3">
         <Form.Label>Titel:</Form.Label>
-        <Form.Control placeholder="Titel här..."/>
+        <Form.Control 
+            placeholder="Titel här..."
+            value={movieTitle}
+            onChange={e => setMovieTitle(e.target.value)}
+        />
       </Form.Group>
       <Form.Group className="mb-3">
         <Form.Label>Betyg:</Form.Label>
-        <Form.Select>
-          <option>Välj betyg här...</option>
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
+        <Form.Select
+            value={movieGrade}
+            onChange={e => setMovieGrade(e.target.value)}
+        >
+          <option value="0">Välj betyg här...</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
         </Form.Select>
       </Form.Group>
       <Form.Group className="mb-3">
-        <Button variant="success">Spara film</Button>
+        <Button variant="success" onClick={handleSubmit}>Spara film</Button>
       </Form.Group>
     </>
   );
